@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf0b22f014ec7be40896c70f04417587, type: 3}
   m_Name: GaiaSettings
   m_EditorClassIdentifier: 
-  m_currentController: 1
+  m_currentController: 6
   m_customPlayerObject: {fileID: 0}
   m_customPlayerCamera: {fileID: 0}
   m_instantiateCustomControllers: 0
@@ -50,7 +50,7 @@ MonoBehaviour:
   m_enableUnderwaterEffects: 1
   m_createWind: 1
   m_windType: 0
-  m_createScreenShotter: 1
+  m_createScreenShotter: 0
   m_focusPlayerOnSetup: 0
   m_FPFDefaultThreshold: 5000
   m_XRControllerPackageName: GaiaXRController.unitypackage
