@@ -5,8 +5,8 @@ using UnityEngine.Events;
 namespace UnityEngine.AzureSky
 {
     [ExecuteInEditMode]
-    [AddComponentMenu("Azure[Sky]/Azure Time Controller")]
-    public class AzureTimeController : MonoBehaviour
+    [AddComponentMenu("SKY Time Controller")]
+    public class AzureTimeController : Singleton<AzureTimeController>
     {
         // Serialized Fields
         [Tooltip("The Transform used to simulate the sun position in the sky.")]

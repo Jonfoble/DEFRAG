@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: M_02_Grass_Daisies_URP
+  m_Shader: {fileID: 4800000, guid: fb1fac9dc9a08b04cb6cceeb2fd6a484, type: 3}
+  m_ShaderKeywords: _ALPHATEST_ON _MASKMAP _RECEIVESSAO
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BaseMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 0ee82653ef92f41acbced065b3229fb4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTexArray:
+        m_Texture: {fileID: 18700000, guid: f8eedb2bcec3f4d1199817bb2231bccf, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SpecTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SpecTexArray:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AlphaClip: 1
+    - _AmbientReflection: 1
+    - _BendingMode: 0
+    - _BlinnPhong: 0
+    - _Clip: 0.8
+    - _Cull: 0
+    - _Culling: 0
+    - _Cutoff: 0.3
+    - _CutoffShadows: 0.5
+    - _DisplacementSampleSize: 0.5
+    - _DisplacementStrength: 4
+    - _DisplacementStrengthVertical: 4
+    - _Distortion: 0.01
+    - _EnableDebug: 0
+    - _EnableDisplacement: 0
+    - _EnableMask: 1
+    - _EnvironmentReflections: 1
+    - _Layers: 1
+    - _MixMode: 2
+    - _NormalBend: 0.5
+    - _NormalDisplacement: 1
+    - _Occlusion: 0.5
+    - _ReceiveShadows: 1
+    - _SSAO: 1
+    - _SSAOStrength: 0.5
+    - _SampleNormal: 0
+    - _SamplePivot: 0
+    - _ScaleMode: 0
+    - _ShadowStrength: 0.7
+    - _SizeThreshold: 0.5
+    - _Smoothness: 0.5
+    - _Spec: 0
+    - _SpecularHighlights: 1
+    - _TextureArrays: 0
+    - _TransStrength: 1
+    - _TranslucencyPower: 7
+    - _TranslucencyStrength: 1
+    - _VSP: 0
+    - _VSPCullDist: 80
+    - _VSPCullFade: 0.001
+    - _VSPScaleMultiplier: 1
+    - _WindLOD: 0
+    - _WindMultiplier: 1
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _DebugColor: {r: 1, g: 0, b: 0, a: 1}
+    - _DryColor: {r: 0.83137256, g: 0.83137256, b: 0.85490197, a: 1}
+    - _HealthyColor: {r: 1, g: 1, b: 1, a: 1}
+    - _MinMaxScales: {r: 0.8, g: 2.4999998, b: 0, a: 0}
+    - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _WindMultiplier: {r: 1, g: 0.3, b: 0, a: 0}
+  m_BuildTextureStacks: []

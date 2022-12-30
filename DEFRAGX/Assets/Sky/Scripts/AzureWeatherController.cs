@@ -6,7 +6,7 @@ namespace UnityEngine.AzureSky
 {
     [ExecuteInEditMode]
     [AddComponentMenu("Azure[Sky]/Azure Weather Controller")]
-    public class AzureWeatherController : MonoBehaviour
+    public class AzureWeatherController : Singleton<AzureWeatherController>
     {
         [Tooltip("Drag the 'Azure Time Controller' here if you want the weather profiles to be avaluated using Azure time of day. Otherwise you will " +
         "need to evaluate the profiles by code calling the 'SetEvaluateTime(float evaluateTime)' on this component.")]

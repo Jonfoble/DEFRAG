@@ -29,12 +29,38 @@ MonoBehaviour:
   m_previewImageBytes: 
   m_previewImageWidth: 0
   m_previewImageHeight: 0
-  m_operations: []
+  m_operations:
+  - m_description: Clearing - Details, CurrentTerrainOnly, AnySource
+    m_operationType: 3
+    m_isActive: 1
+    m_affectedTerrainNames:
+    - Terrain
+    m_operationDateTime: 27.12.2022 11:57:29
+    scriptableObjectAssetGUID: 8746a76033bb47648938eb8b12705e23
+    m_isFoldedOut: 0
+    sessionPlaybackState: 1
+    m_terrainsFoldedOut: 0
+    m_serializedExternalAction: 
+  - m_description: Spawning - Gaia Pro Sample-Grass(Clone)
+    m_operationType: 7
+    m_isActive: 1
+    m_affectedTerrainNames:
+    - Terrain
+    m_operationDateTime: 27.12.2022 12:08:08
+    scriptableObjectAssetGUID: 03186ea09ec0ab9438d5513e7fe1e7b1
+    m_isFoldedOut: 0
+    sessionPlaybackState: 1
+    m_terrainsFoldedOut: 0
+    m_serializedExternalAction: 
   m_terrainMinMaxCache:
   - guid: 58da03fc290c193419254c5dbe9ba5a5
     isWorldmap: 0
     recalculate: 0
     min: 23.187855
     max: 75.96991
-  m_bakedMaskCacheEntries: []
+  m_bakedMaskCacheEntries:
+  - fileName: Terrain_LayerGameObject_28672_0,5
+    assetPath: Assets/Procedural Worlds/Gaia/TerrainCollisionData/Terrain/Terrain_LayerGameObject_28672_0,5
+    fullPath: C:/Users/jonfo/Documents/GitHub/DEFRAG/DEFRAGX/Assets/Procedural Worlds/Gaia/TerrainCollisionData/Terrain/Terrain_LayerGameObject_28672_0,5
+    texture: {fileID: 0}
   m_worldBiomeMaskSettings: {fileID: 0}

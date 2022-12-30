@@ -5,6 +5,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -4639633596547949344, guid: a5661ca8f9fd5714c9436e62b1c24d83, type: 3}
@@ -76,6 +77,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5372799523567150308, guid: a5661ca8f9fd5714c9436e62b1c24d83, type: 3}
+      propertyPath: NetworkedBehaviours.Array.data[0]
+      value: 
+      objectReference: {fileID: 1379416077797167547}
+    - target: {fileID: 5372799523567150308, guid: a5661ca8f9fd5714c9436e62b1c24d83, type: 3}
       propertyPath: NetworkedBehaviours.Array.data[1]
       value: 
       objectReference: {fileID: 2558047886041191096}
@@ -129,7 +134,27 @@ PrefabInstance:
       objectReference: {fileID: 7400000, guid: 8362656cec097804c84056812cf927b7, type: 2}
     m_RemovedComponents:
     - {fileID: 7914034279507175495, guid: a5661ca8f9fd5714c9436e62b1c24d83, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7675871303481681139, guid: a5661ca8f9fd5714c9436e62b1c24d83, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1779402971531733110}
+    - targetCorrespondingSourceObject: {fileID: 7675871303481681139, guid: a5661ca8f9fd5714c9436e62b1c24d83, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 255161406}
   m_SourcePrefab: {fileID: 100100000, guid: a5661ca8f9fd5714c9436e62b1c24d83, type: 3}
+--- !u!114 &1379416077797167547 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5092454765829744890, guid: a5661ca8f9fd5714c9436e62b1c24d83, type: 3}
+  m_PrefabInstance: {fileID: 6163355575306877249}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4543726809341304242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a3fc566dcfc404cb65e12701aa8729b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2558047886041191096 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8505225752620985337, guid: a5661ca8f9fd5714c9436e62b1c24d83, type: 3}
@@ -153,10 +178,21 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4543726809341304242}
-  serializedVersion: 2
+  serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
