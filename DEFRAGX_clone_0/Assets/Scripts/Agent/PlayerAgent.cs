@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Fusion.KCC;
+using UnityEngine.AI;
 
 namespace Projectiles
 {
@@ -11,6 +12,7 @@ namespace Projectiles
 		public Player  Owner   { get; set; }
 		public Weapons Weapons { get; private set; }
 		public Health  Health  { get; private set; }
+		public NavMeshAgent NetworkTransform { get; internal set; }
 
 		// PRIVATE MEMBERS
 

@@ -1,10 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AzureSky;
+using UnityEngine.Events;
 
-public class FogInstantiator : MonoBehaviour
+public class FogInstantiator : Singleton<FogInstantiator>
 {
+	public UnityAction OnFogWeather;
+	public UnityAction OnDefaultWeather;
 	[SerializeField] private AzureWeatherProfile fogWeather;
 	[SerializeField] private Vector2 timeToFog = new Vector2(20f, 0f);
 	[SerializeField] private Vector2 timeToEraseFog = new Vector2(6f, 0f);
@@ -23,10 +24,12 @@ public class FogInstantiator : MonoBehaviour
 	}
 	void InitiateFog(AzureWeatherProfile weatherProfile)
 	{
+		OnFogWeather?.Invoke();
 		AzureWeatherController.Instance.SetNewWeatherProfile(weatherProfile, 20f);
 	}
 	void EraseFog(AzureWeatherProfile weatherProfile)
 	{
+		OnDefaultWeather?.Invoke();
 		AzureWeatherController.Instance.SetNewWeatherProfile(weatherProfile, 20f);
 	}
 }
