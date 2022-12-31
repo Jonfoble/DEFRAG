@@ -39,7 +39,7 @@ public class EnemyAI : MonoBehaviour
 
     private void ChasePlayer()
     {
-        agent.SetDestination(player.Transform.position);
+        agent.destination = player.transform.position;
     }
 
     private void AttackPlayer()
