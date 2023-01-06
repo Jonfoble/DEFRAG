@@ -61,7 +61,7 @@ namespace Projectiles
 
 			if (_health.IsAlive == false)
 			{
-				if (_reviveCooldown.Expired(Runner) == true)
+				/*if (_reviveCooldown.Expired(Runner) == true)
 				{
 					_health.ResetHealth();
 					_reviveCooldown = default;
@@ -69,7 +69,8 @@ namespace Projectiles
 				else if (_reviveCooldown.IsRunning == false)
 				{
 					_reviveCooldown = TickTimer.CreateFromSeconds(Runner, _reviveTime);
-				}
+				}*/
+				Runner.Despawn(this.gameObject.GetComponent<NetworkObject>());
 			}
 		}
 

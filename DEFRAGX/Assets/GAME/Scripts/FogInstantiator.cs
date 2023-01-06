@@ -25,12 +25,12 @@ public class FogInstantiator : Singleton<FogInstantiator>
 	}
 	public void InitiateFog(AzureWeatherProfile weatherProfile)
 	{
-		AzureWeatherController.Instance.SetNewWeatherProfile(weatherProfile, 20f);
+		AzureWeatherController.Instance.SetNewWeatherProfile(weatherProfile, 25f);
 		OnFogWeather?.Invoke();
 	}
 	public void EraseFog(AzureWeatherProfile weatherProfile)
 	{
-		AzureWeatherController.Instance.SetNewWeatherProfile(weatherProfile, 20f);
+		AzureWeatherController.Instance.SetNewWeatherProfile(weatherProfile, 25f);
 		OnDefaultWeather?.Invoke();
 	}
 }

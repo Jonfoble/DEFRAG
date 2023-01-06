@@ -42,6 +42,7 @@ public class EnemyAI : NetworkBehaviour ,ISpawned ,IDespawned
     }
 	private void ChasePlayer()
     {
+		if (nTargetTransform != null)
         Agent.SetDestination(nTargetTransform.Transform.position);
     }
     private void AttackPlayer()

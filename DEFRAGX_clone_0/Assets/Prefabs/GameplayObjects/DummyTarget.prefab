@@ -93,9 +93,17 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1320323365501152398}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 0
-  serializedVersion: 2
+  serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3952619390650465543
@@ -115,7 +123,7 @@ MonoBehaviour:
   BoxExtents: {x: 0, y: 0, z: 0}
   Offset: {x: 0, y: 0, z: 0}
   Root: {fileID: 8505225752620985337}
-  GizmosColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  GizmosColor: {r: 1, g: 0.9203187, b: 0, a: 1}
 --- !u!1 &2714338787473730388
 GameObject:
   m_ObjectHideFlags: 0
@@ -325,6 +333,7 @@ MonoBehaviour:
   _reviveTime: 3
   _animation: {fileID: 8092196904999219811}
   _reviveClip: {fileID: 7400000, guid: 57ba2bfbfbd4911428721eb913bd9b49, type: 2}
+  _useLagCompensation: 0
 --- !u!1 &8697866097654706263
 GameObject:
   m_ObjectHideFlags: 0

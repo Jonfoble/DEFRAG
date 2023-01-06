@@ -1,13 +1,14 @@
 using Fusion;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class EnemySpawner : Singleton<EnemySpawner>, ISpawned, IDespawned
 {
 	[SerializeField] private List<NetworkPrefabRef> Enemies;
 	private List<NetworkObject> spawnedEnemies;
+	private int currentWave = 1;
 	private void OnEnable()
 	{
 		FogInstantiator.Instance.OnFogWeather += SpawnEnemies;
@@ -18,16 +19,24 @@ public class EnemySpawner : Singleton<EnemySpawner>, ISpawned, IDespawned
 		FogInstantiator.Instance.OnFogWeather -= SpawnEnemies;
 		FogInstantiator.Instance.OnDefaultWeather -= StopSpawningEnemies;
 	}
-	public void SpawnEnemies()
+	private void SpawnEnemies()
 	{
-		NetworkObject spawnedEnemy = Runner.Spawn(Enemies[0], new Vector3(20.459f, 30.971f, 190.49f), Quaternion.identity);
-		spawnedEnemies.Append(spawnedEnemy);
+		for (int i = 0; i < currentWave * 5; i++)
+		{
+			NetworkObject spawnedEnemy = Runner.Spawn(Enemies[0], GetRandomSpawnPoint(), Quaternion.identity);
+		}
 	}
 	private void StopSpawningEnemies()
 	{
-		foreach (var enemy in spawnedEnemies)
+		foreach (var enemy in FindObjectsOfType<EnemyAI>())
 		{
-			Runner.Despawn(enemy);
+			Runner.Despawn(enemy.GetComponent<NetworkObject>());
 		}
 	}
+	private Vector3 GetRandomSpawnPoint()
+	{
+		Vector3 randomSpawnPoint = new Vector3(Random.Range(10f, 20f), Random.Range(35f, 40f), Random.Range(-190f, 300f));
+		return randomSpawnPoint;
+	}
+
 }
