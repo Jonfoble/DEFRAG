@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace UnityEngine.AzureSky
 {
     [ExecuteInEditMode]
-    [AddComponentMenu("Azure[Sky]/Azure Weather Controller")]
+    [AddComponentMenu("SKY/Azure Weather Controller")]
     public class AzureWeatherController : Singleton<AzureWeatherController>
     {
         [Tooltip("Drag the 'Azure Time Controller' here if you want the weather profiles to be avaluated using Azure time of day. Otherwise you will " +

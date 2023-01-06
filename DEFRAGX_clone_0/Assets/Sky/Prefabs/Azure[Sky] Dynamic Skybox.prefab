@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 514c49ef590d2f946a170a58668429e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
   fogWeather: {fileID: 11400000, guid: 0cbd86fb3b321504489a930e9de3a671, type: 2}
   timeToFog: {x: 20, y: 0}
   timeToEraseFog: {x: 6, y: 0}
@@ -19330,7 +19331,7 @@ Transform:
   - {fileID: 3254596678858578147}
   - {fileID: 5926043662547227762}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3571982668138255869
 MonoBehaviour:
@@ -19344,6 +19345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd7ea2447e0e6f748b11a51d891f172d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
   m_sunTransform: {fileID: 7584418678148718094}
   m_moonTransform: {fileID: 6259751824070821179}
   m_directionalLight: {fileID: 3254596678858578147}
@@ -19455,6 +19457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91e77c53ec8719140806766414d25908, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
   m_azureTimeController: {fileID: 3571982668138255869}
   m_defaultWeatherTransitionLength: 5
   m_defaultWeatherProfilesList:
@@ -20422,9 +20425,12 @@ MonoBehaviour:
     RawGuidValue: 7d3e532011e2f7d4aaf0dedd092b74ca
   NestedObjects: []
   NetworkedBehaviours:
+  - {fileID: 3571982668138255869}
+  - {fileID: 3571982668138255870}
   - {fileID: 3859214369501997066}
   - {fileID: 3421915779522860380}
   - {fileID: 6783752029466882951}
+  - {fileID: 5585041274240620644}
   SimulationBehaviours: []
 --- !u!1 &3571982668178255962
 GameObject:

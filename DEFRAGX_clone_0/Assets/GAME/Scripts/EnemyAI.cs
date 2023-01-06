@@ -1,53 +1,53 @@
 ﻿using Fusion;
 using Projectiles;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyAI : MonoBehaviour
+public class EnemyAI : NetworkBehaviour ,ISpawned ,IDespawned
 {
-    private NavMeshAgent agent;
+    public static EnemyAI LocalEnemy { get; set;}
 
-    private NetworkTransform player;
+    private NavMeshAgent Agent;
+    private NetworkObject targetPlayer;
+    private NetworkTransform nTransform;
+    private NetworkTransform nTargetTransform;
 
-    public LayerMask whatIsGround, whatIsPlayer;
+    // The distance at which the enemy will start chasing the target
+    [SerializeField] private float chaseRange = 5f;
+    // The speed at which the enemy will chase the target
+    [SerializeField] private float chaseSpeed = 5f;
 
     //Attacking
     [SerializeField] private float timeBetweenAttacks;
     private bool alreadyAttacked;
 
     //States
-    private float sightRange, attackRange;
-    private bool playerInSightRange, playerInAttackRange;
-
-    private void Awake()
+    [SerializeField] private float attackRange;
+    private bool playerInAttackRange;
+    public override void Spawned()
     {
-        
-        agent = GetComponent<NavMeshAgent>();
+        LocalEnemy = this;
+        nTransform = gameObject.GetComponent<NetworkTransform>();
+        Agent = gameObject.GetComponent<NavMeshAgent>();
+        FindTargetOnSpawn();
     }
+
     private void Update()
     {
-        player = FindObjectOfType<PlayerAgent>().gameObject.GetComponent<NetworkTransform>();
-        //Check for sight and attack range
-        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
-        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
-
-
-
-        if (playerInSightRange && !playerInAttackRange) ChasePlayer();
-        if (playerInAttackRange && playerInSightRange) AttackPlayer();
+        if (!playerInAttackRange) ChasePlayer();
+        if (playerInAttackRange) AttackPlayer();
+        
     }
-
-    private void ChasePlayer()
+	private void ChasePlayer()
     {
-        agent.destination = player.transform.position;
+        Agent.SetDestination(nTargetTransform.Transform.position);
     }
-
     private void AttackPlayer()
     {
-        //Make sure enemy doesn't move
-        agent.SetDestination(transform.position);
 
-        transform.LookAt(player.Transform);
+        transform.LookAt(nTargetTransform.Transform.position);
 
         if (!alreadyAttacked)
         {
@@ -65,4 +65,15 @@ public class EnemyAI : MonoBehaviour
     {
         alreadyAttacked = false;
     }
+    private void FindTargetOnSpawn()
+	{
+        targetPlayer = FindTarget();
+        nTargetTransform = targetPlayer.gameObject.GetComponent<NetworkTransform>();
+	}
+    private NetworkObject FindTarget()
+	{
+        List<GameObject> players = GameObject.FindGameObjectsWithTag("Player").ToList();
+        NetworkObject target = players.GetRandom().GetComponent<NetworkObject>();
+        return target;
+	}
 }

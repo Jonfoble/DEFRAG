@@ -1,3 +1,4 @@
+using Fusion;
 using UnityEngine;
 using UnityEngine.AzureSky;
 using UnityEngine.Events;
@@ -22,14 +23,14 @@ public class FogInstantiator : Singleton<FogInstantiator>
 			EraseFog(AzureWeatherController.Instance.GetDefaultWeatherProfile());
 		}
 	}
-	void InitiateFog(AzureWeatherProfile weatherProfile)
+	public void InitiateFog(AzureWeatherProfile weatherProfile)
 	{
+		AzureWeatherController.Instance.SetNewWeatherProfile(weatherProfile, 20f);
 		OnFogWeather?.Invoke();
-		AzureWeatherController.Instance.SetNewWeatherProfile(weatherProfile, 20f);
 	}
-	void EraseFog(AzureWeatherProfile weatherProfile)
+	public void EraseFog(AzureWeatherProfile weatherProfile)
 	{
-		OnDefaultWeather?.Invoke();
 		AzureWeatherController.Instance.SetNewWeatherProfile(weatherProfile, 20f);
+		OnDefaultWeather?.Invoke();
 	}
 }
