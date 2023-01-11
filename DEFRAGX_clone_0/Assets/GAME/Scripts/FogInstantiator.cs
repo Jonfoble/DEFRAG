@@ -9,7 +9,7 @@ public class FogInstantiator : Singleton<FogInstantiator>
 	public UnityAction OnDefaultWeather;
 	[SerializeField] private AzureWeatherProfile fogWeather;
 	[SerializeField] private Vector2 timeToFog = new Vector2(20f, 0f);
-	[SerializeField] private Vector2 timeToEraseFog = new Vector2(6f, 0f);
+	[SerializeField] private Vector2 timeToEraseFog = new Vector2(7f, 0f);
 	private Vector2 timeOfDay;
 	private void Update()
 	{
