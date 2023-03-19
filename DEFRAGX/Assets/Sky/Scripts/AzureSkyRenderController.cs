@@ -5,7 +5,7 @@ namespace UnityEngine.AzureSky
 {
     [ExecuteInEditMode]
     [AddComponentMenu("Azure[Sky]/Azure Sky Render Controller")]
-    public class AzureSkyRenderController : MonoBehaviour
+    public class AzureSkyRenderController : Singleton<AzureSkyRenderController>
     {
         #if UNITY_EDITOR
         [SerializeField] private bool m_referencesHeaderGroup;

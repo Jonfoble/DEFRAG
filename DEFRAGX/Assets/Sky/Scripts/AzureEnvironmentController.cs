@@ -41,14 +41,14 @@ namespace UnityEngine.AzureSky
                 reflectionProbe.refreshMode = refreshMode;
                 reflectionProbe.timeSlicingMode = timeSlicingMode;
             }
-            #endif
+#endif
 
             // Environment lighting
-            RenderSettings.ambientIntensity = environmentIntensity;
-            RenderSettings.ambientLight = environmentAmbientColor;
-            RenderSettings.ambientSkyColor = environmentAmbientColor;
-            RenderSettings.ambientEquatorColor = environmentEquatorColor;
-            RenderSettings.ambientGroundColor = environmentGroundColor;
+            if (HasStateAuthority)
+            {
+                RPC_SetRenderSettings();
+			}
+            
 
             if (!Application.isPlaying || state != AzureReflectionProbeState.On) return;
             
@@ -64,19 +64,27 @@ namespace UnityEngine.AzureSky
 
             if (!(m_timeSinceLastProbeUpdate >= refreshInterval)) return;
 
-            RPC_UpdateReflectionProbe();
-            
+            if (HasStateAuthority)
+            {
+                RPC_UpdateReflectionProbe();
+            }
             m_timeSinceLastProbeUpdate = 0;
         }
+        [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+        private void RPC_SetRenderSettings()
+        {
+			RenderSettings.ambientIntensity = environmentIntensity;
+			RenderSettings.ambientLight = environmentAmbientColor;
+			RenderSettings.ambientSkyColor = environmentAmbientColor;
+			RenderSettings.ambientEquatorColor = environmentEquatorColor;
+			RenderSettings.ambientGroundColor = environmentGroundColor;
+		}
 
         [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
         public void RPC_UpdateReflectionProbe()
         {
-            if (HasInputAuthority)
-            {
-				reflectionProbe.RenderProbe();
-				//DynamicGI.UpdateEnvironment();
-			}
+			reflectionProbe.RenderProbe();
+			//DynamicGI.UpdateEnvironment();
 		}
     }
 }
