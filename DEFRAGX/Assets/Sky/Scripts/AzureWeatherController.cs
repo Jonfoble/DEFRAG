@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Reflection;
 using System.Collections.Generic;
+using Fusion;
 
 namespace UnityEngine.AzureSky
 {
@@ -171,7 +172,7 @@ namespace UnityEngine.AzureSky
         /// <summary>
         /// Changes the current weather profile with transition.
         /// </summary>
-        public void SetNewWeatherProfile(AzureWeatherProfile profile, float transitionTime)
+		public void SetNewWeatherProfile(AzureWeatherProfile profile, float transitionTime)
         {
             m_targetWeatherProfile = profile;
             m_weatherTransitionLength = transitionTime;

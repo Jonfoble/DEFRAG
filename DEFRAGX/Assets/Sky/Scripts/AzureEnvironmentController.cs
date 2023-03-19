@@ -1,11 +1,13 @@
 ﻿using UnityEngine.Rendering;
+using Fusion;
+using UnityEngine;
 
 namespace UnityEngine.AzureSky
 {
     [ExecuteInEditMode]
     [AddComponentMenu("Azure[Sky]/Azure Environment Controller")]
-    public class AzureEnvironmentController : MonoBehaviour
-    {
+    public class AzureEnvironmentController : Singleton<AzureEnvironmentController>
+	{
         public ReflectionProbe reflectionProbe;
         public AzureReflectionProbeState state = AzureReflectionProbeState.Off;
         public ReflectionProbeRefreshMode refreshMode = ReflectionProbeRefreshMode.OnAwake;
@@ -52,8 +54,7 @@ namespace UnityEngine.AzureSky
             
             if (refreshMode == ReflectionProbeRefreshMode.EveryFrame)
             {
-                reflectionProbe.RenderProbe();
-                //DynamicGI.UpdateEnvironment();
+                RPC_UpdateReflectionProbe();
                 return;
             }
 
@@ -62,15 +63,20 @@ namespace UnityEngine.AzureSky
             m_timeSinceLastProbeUpdate += Time.deltaTime;
 
             if (!(m_timeSinceLastProbeUpdate >= refreshInterval)) return;
-            reflectionProbe.RenderProbe();
-            //DynamicGI.UpdateEnvironment();
+
+            RPC_UpdateReflectionProbe();
+            
             m_timeSinceLastProbeUpdate = 0;
         }
-        
-        public void UpdateReflectionProbe()
+
+        [Rpc(RpcSources.StateAuthority, RpcTargets.InputAuthority)]
+        public void RPC_UpdateReflectionProbe()
         {
-            reflectionProbe.RenderProbe();
-            //DynamicGI.UpdateEnvironment();
-        }
+            if (HasStateAuthority)
+            {
+				reflectionProbe.RenderProbe();
+				//DynamicGI.UpdateEnvironment();
+			}
+		}
     }
 }

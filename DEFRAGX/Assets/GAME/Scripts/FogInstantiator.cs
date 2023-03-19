@@ -14,6 +14,14 @@ public class FogInstantiator : Singleton<FogInstantiator>
 	private void Update()
 	{
 		timeOfDay = AzureTimeController.Instance.GetTimeOfDay();
+		if (HasStateAuthority)
+		{
+			RPC_InvokeFogState();
+		}
+	}
+	[Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+	public void RPC_InvokeFogState()
+	{
 		if (timeOfDay == timeToFog)
 		{
 			InitiateFog(fogWeather);

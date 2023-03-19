@@ -14,11 +14,6 @@ public class EnemyAI : NetworkBehaviour ,ISpawned ,IDespawned
     private NetworkTransform nTransform;
     private NetworkTransform nTargetTransform;
 
-    // The distance at which the enemy will start chasing the target
-    [SerializeField] private float chaseRange = 5f;
-    // The speed at which the enemy will chase the target
-    [SerializeField] private float chaseSpeed = 5f;
-
     //Attacking
     [SerializeField] private float timeBetweenAttacks;
     private bool alreadyAttacked;
