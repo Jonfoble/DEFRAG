@@ -69,10 +69,10 @@ namespace UnityEngine.AzureSky
             m_timeSinceLastProbeUpdate = 0;
         }
 
-        [Rpc(RpcSources.StateAuthority, RpcTargets.InputAuthority)]
+        [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
         public void RPC_UpdateReflectionProbe()
         {
-            if (HasStateAuthority)
+            if (HasInputAuthority)
             {
 				reflectionProbe.RenderProbe();
 				//DynamicGI.UpdateEnvironment();
