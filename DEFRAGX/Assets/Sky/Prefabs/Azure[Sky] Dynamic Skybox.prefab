@@ -19331,7 +19331,6 @@ GameObject:
   - component: {fileID: 3571982668138255871}
   - component: {fileID: 3571982668138255857}
   - component: {fileID: 3571982668138255856}
-  - component: {fileID: 1330737652535673720}
   m_Layer: 0
   m_Name: Azure[Sky] Dynamic Skybox
   m_TagString: Untagged
@@ -19363,6 +19362,7 @@ Transform:
   - {fileID: 3254596678858578147}
   - {fileID: 5926043662547227762}
   - {fileID: 5226514689300389219}
+  - {fileID: 6696542615989996229}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -20436,36 +20436,6 @@ MonoBehaviour:
       m_RotationOrder: 4
     audioDelay: 0.5
     position: {x: 0, y: 600, z: 1250}
---- !u!114 &1330737652535673720
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3571982668138255858}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObjectInterest: 0
-  DefaultInterestGroups: []
-  DestroyWhenStateAuthorityLeaves: 0
-  AllowStateAuthorityOverride: 0
-  AoiPositionSource: {fileID: 0}
-  Flags: 67841
-  NetworkGuid:
-    RawGuidValue: 7d3e532011e2f7d4aaf0dedd092b74ca
-  NestedObjects:
-  - {fileID: 3516447421934358204}
-  NetworkedBehaviours:
-  - {fileID: 3571982668138255869}
-  - {fileID: 3571982668138255870}
-  - {fileID: 3859214369501997066}
-  - {fileID: 3421915779522860380}
-  - {fileID: 6783752029466882951}
-  - {fileID: 5585041274240620644}
-  SimulationBehaviours: []
 --- !u!1 &3571982668178255962
 GameObject:
   m_ObjectHideFlags: 0
@@ -40223,6 +40193,37 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!1 &3874140481882705100
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6696542615989996229}
+  m_Layer: 0
+  m_Name: Networked Light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6696542615989996229
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3874140481882705100}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3571982668138255868}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4687002588029991538
 GameObject:
   m_ObjectHideFlags: 0

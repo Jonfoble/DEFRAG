@@ -12,7 +12,7 @@ namespace UnityEngine.AzureSky
         // Serialized Fields
         [Tooltip("The Transform used to simulate the sun position in the sky.")]
         [SerializeField] private Transform m_sunTransform = null;
-        
+
         [Tooltip("The Transform used to simulate the moon position in the sky.")]
         [SerializeField] private Transform m_moonTransform = null;
 
@@ -151,7 +151,7 @@ namespace UnityEngine.AzureSky
         // Timeline transition stuffs
         private int m_timelineTransitionTargetHour = 0;
         private int m_timelineTransitionTargetMinute = 0;
-        private float  m_timelineTransitionTargetSpeed = 1f;
+        private float m_timelineTransitionTargetSpeed = 1f;
         private int m_timelineTransitionTargetMonth = 0;
         private int m_timelineTransitionTargetDay = 0;
         private int m_timelineTransitionTargetYear = 0;
@@ -176,13 +176,13 @@ namespace UnityEngine.AzureSky
             EvaluateTimeOfDay();
             ComputeCelestialCoordinates();
             EvaluateSunMoonElevation();
-            SetDirectionalLightRotation();
+            WithoutRPCSetDirectionalLightRotation();
         }
 
         private void Update()
         {
             // Only in gameplay
-            if (Application.isPlaying)
+            if (Application.isPlaying && HasStateAuthority)
             {
                 // Move the prefab always to the target position
                 if (m_followTarget)
@@ -245,7 +245,7 @@ namespace UnityEngine.AzureSky
 
             // Editor only
             // Computes the celestial coordinates and light rotation in edit mode.
-            #if UNITY_EDITOR
+#if UNITY_EDITOR
             if (!Application.isPlaying)
             {
                 // Evaluates the time of day
@@ -255,9 +255,13 @@ namespace UnityEngine.AzureSky
                 // Gets the sun and moon direction and elevation
                 EvaluateSunMoonElevation();
                 // Sets the directional light rotation
-                SetDirectionalLightRotation();
+                if (HasStateAuthority)
+                {
+					RPC_SetDirectionalLightRotation();
+				}
+                
             }
-            #endif
+#endif
         }
 
         private void FixedUpdate()
@@ -265,7 +269,10 @@ namespace UnityEngine.AzureSky
             // Sets the sun, moon and planets position
             ComputeCelestialCoordinates();
             // Sets the directional light rotation
-            SetDirectionalLightRotation();
+            if (HasStateAuthority)
+            {
+				RPC_SetDirectionalLightRotation();
+			}
         }
 
         /// <summary>
@@ -337,7 +344,7 @@ namespace UnityEngine.AzureSky
                         CancelTimelineTransition();
                         return;
                     }
-                    
+
                     if (m_day >= m_timelineTransitionTargetDay)
                     {
                         if (m_timelineTransitionTargetMonth == int.MaxValue && m_timelineTransitionTargetYear == int.MaxValue)
@@ -430,7 +437,9 @@ namespace UnityEngine.AzureSky
         /// <summary>
         /// Sets the directional light transform direction.
         /// </summary>
-        private void SetDirectionalLightRotation()
+
+        [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+        private void RPC_SetDirectionalLightRotation()
         {
             m_directionalLight.localRotation = Quaternion.LookRotation(m_sunElevation >= 0.0f ? m_sunLocalDirection : m_moonLocalDirection);
 
@@ -443,38 +452,51 @@ namespace UnityEngine.AzureSky
                     m_directionalLight.localEulerAngles = m_lightLocalDirection;
             }
         }
+		private void WithoutRPCSetDirectionalLightRotation()
+		{
+			m_directionalLight.localRotation = Quaternion.LookRotation(m_sunElevation >= 0.0f ? m_sunLocalDirection : m_moonLocalDirection);
 
-        // Deprecated!
-        /// <summary>
-        /// Scans the custom event list and perform the event that match with the current date and time.
-        /// </summary>
-        //private void ScanCustomEventList()
-        //{
-        //    if (m_customEventList.Count <= 0)
-        //        return;
-        //
-        //    for (int i = 0; i < m_customEventList.Count; i++)
-        //    {
-        //        if (m_customEventList[i].unityEvent == null)
-        //            continue;
-        //        if (m_customEventList[i].year != m_year && m_customEventList[i].year != -1)
-        //            continue;
-        //        if (m_customEventList[i].month != m_month && m_customEventList[i].month != -1)
-        //            continue;
-        //        if (m_customEventList[i].day != m_day && m_customEventList[i].day != -1)
-        //            continue;
-        //        if (m_customEventList[i].hour != m_hour && m_customEventList[i].hour != -1)
-        //            continue;
-        //        if (m_customEventList[i].minute != m_minute && m_customEventList[i].minute != -1)
-        //            continue;
-        //        m_customEventList[i].unityEvent.Invoke();
-        //    }
-        //}
+			// Avoid the directional light to get close to the horizon line
+			if (m_minLightAltitude > 0f && m_minLightAltitude < 90f)
+			{
+				m_lightLocalDirection = m_directionalLight.localEulerAngles;
 
-        /// <summary>
-        /// Scans the custom event list and perform the event that match with the current date and time.
-        /// </summary>
-        private void ScanCustomEventList()
+				if (m_lightLocalDirection.x <= m_minLightAltitude) m_lightLocalDirection.x = m_minLightAltitude;
+				m_directionalLight.localEulerAngles = m_lightLocalDirection;
+			}
+		}
+
+		// Deprecated!
+		/// <summary>
+		/// Scans the custom event list and perform the event that match with the current date and time.
+		/// </summary>
+		//private void ScanCustomEventList()
+		//{
+		//    if (m_customEventList.Count <= 0)
+		//        return;
+		//
+		//    for (int i = 0; i < m_customEventList.Count; i++)
+		//    {
+		//        if (m_customEventList[i].unityEvent == null)
+		//            continue;
+		//        if (m_customEventList[i].year != m_year && m_customEventList[i].year != -1)
+		//            continue;
+		//        if (m_customEventList[i].month != m_month && m_customEventList[i].month != -1)
+		//            continue;
+		//        if (m_customEventList[i].day != m_day && m_customEventList[i].day != -1)
+		//            continue;
+		//        if (m_customEventList[i].hour != m_hour && m_customEventList[i].hour != -1)
+		//            continue;
+		//        if (m_customEventList[i].minute != m_minute && m_customEventList[i].minute != -1)
+		//            continue;
+		//        m_customEventList[i].unityEvent.Invoke();
+		//    }
+		//}
+
+		/// <summary>
+		/// Scans the custom event list and perform the event that match with the current date and time.
+		/// </summary>
+		private void ScanCustomEventList()
         {
             if (m_customEventList.Count <= 0)
                 return;

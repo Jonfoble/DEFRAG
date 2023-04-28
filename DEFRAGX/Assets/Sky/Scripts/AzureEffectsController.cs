@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace UnityEngine.AzureSky
 {
-    public class AzureEffectsController : MonoBehaviour
+    public class AzureEffectsController : Singleton<AzureEffectsController>
     {
 
         #if UNITY_EDITOR

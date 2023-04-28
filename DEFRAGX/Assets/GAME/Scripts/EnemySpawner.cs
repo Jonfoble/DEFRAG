@@ -48,7 +48,7 @@ public class EnemySpawner : Singleton<EnemySpawner>, ISpawned, IDespawned
 	private IEnumerator SpawnEnemiesRoutine()
 	{
 		yield return new WaitForSeconds(25);
-		for (int i = 0; i < currentWave * 5; i++)
+		for (int i = 0; i < currentWave * 2; i++)
 		{
 			NetworkObject spawnedEnemy = Runner.Spawn(Enemies[0], GetRandomSpawnPoint(), Quaternion.identity);
 			Debug.Log("Enemy Spawned");

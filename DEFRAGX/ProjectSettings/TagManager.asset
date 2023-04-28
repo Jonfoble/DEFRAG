@@ -10,6 +10,7 @@ TagManager:
   - Synty Medium Farm
   - Synty Small Farm
   - PW - Nature
+  - GlobalLight
   layers:
   - Default
   - TransparentFX
