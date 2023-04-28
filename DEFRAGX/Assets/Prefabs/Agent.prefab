@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 8066553274406139250}
   - component: {fileID: 1216559324647263838}
   - component: {fileID: 7614363783843609501}
+  - component: {fileID: 2326519637687266798}
   m_Layer: 16
   m_Name: Agent
   m_TagString: Player
@@ -77,6 +78,7 @@ MonoBehaviour:
   - {fileID: 8590590556116103162}
   - {fileID: 8066553274406139250}
   - {fileID: 1216559324647263838}
+  - {fileID: 2326519637687266798}
   SimulationBehaviours:
   - {fileID: 8262386319244451753}
   - {fileID: 2808815881330756276}
@@ -361,6 +363,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdd0ba3d383a4dbeb1ab88a7477a4e1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2326519637687266798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 260199661339379077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 514c49ef590d2f946a170a58668429e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
+  fogWeather: {fileID: 11400000, guid: 0cbd86fb3b321504489a930e9de3a671, type: 2}
+  defaultWeather: {fileID: 11400000, guid: 14d5524f72dceb3438e35c87ac03f748, type: 2}
+  timeToFog: {x: 20, y: 0}
+  timeToEraseFog: {x: 6, y: 0}
 --- !u!1 &504059032653147225
 GameObject:
   m_ObjectHideFlags: 0

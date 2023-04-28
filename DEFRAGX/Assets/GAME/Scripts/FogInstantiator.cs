@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.AzureSky;
 using UnityEngine.Events;
 
-public class FogInstantiator : Singleton<FogInstantiator>
+public class FogInstantiator : SimulationSingleton<FogInstantiator>
 {
 	[SerializeField] private AzureWeatherProfile fogWeather;
 	[SerializeField] private AzureWeatherProfile defaultWeather;
@@ -11,21 +11,21 @@ public class FogInstantiator : Singleton<FogInstantiator>
 	[SerializeField] private Vector2 timeToEraseFog = new Vector2(7f, 0f);
 	public UnityAction OnFogWeather;
 	public UnityAction OnDefaultWeather;
-
-	private Vector2 timeOfDay;
-
-	private void Update()
+	
+	private void OnEnable()
 	{
-		timeOfDay = AzureTimeController.Instance.GetTimeOfDay();
-		if (HasStateAuthority)
-		{
-			RPC_InvokeFogState();
-		}
+		if (Runner.IsServer)
+			AzureTimeController.Instance.OnTimeTick += InvokeFogState;
 	}
-
-	[Rpc(RpcSources.StateAuthority, RpcTargets.All)]
-	private void RPC_InvokeFogState()
+	private void OnDisable()
 	{
+		if (Runner.IsServer)
+			AzureTimeController.Instance.OnTimeTick -= InvokeFogState;
+		
+	}
+	private void InvokeFogState(Vector2 timeOfDay)
+	{
+		Debug.Log(timeOfDay);
 		if (timeOfDay == timeToFog)
 		{
 			RPC_InitiateFog();
