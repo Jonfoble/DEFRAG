@@ -9,6 +9,7 @@ namespace UnityEngine.AzureSky
     [AddComponentMenu("SKY Time Controller")]
     public class AzureTimeController : Singleton<AzureTimeController>
     {
+        public Action<Vector2> OnTimeTick;
         // Serialized Fields
         [Tooltip("The Transform used to simulate the sun position in the sky.")]
         [SerializeField] private Transform m_sunTransform = null;
@@ -40,8 +41,20 @@ namespace UnityEngine.AzureSky
 
         [Tooltip("The minute converted from the time of day.")]
         [SerializeField] private int m_minute = 0;
+		public int Minute
+		{
+			get => m_minute;
+			set
+			{
+				if (m_minute != value)
+				{
+                    m_minute = value;
+					OnTimeTick?.Invoke(new Vector2(m_hour, m_minute));
+				}
+			}
+		}
 
-        [Tooltip("The day used by the calendar and date system.")]
+		[Tooltip("The day used by the calendar and date system.")]
         [SerializeField] private int m_day = 1;
 
         [Tooltip("The month used by the calendar and date system.")]
@@ -170,7 +183,7 @@ namespace UnityEngine.AzureSky
         private void Awake()
         {
             m_timeProgressionStep = GetTimeProgressionStep();
-            m_previousMinute = m_minute;
+            m_previousMinute = Minute;
             m_previousHour = m_hour;
             UpdateCalendar();
             EvaluateTimeOfDay();
@@ -225,9 +238,9 @@ namespace UnityEngine.AzureSky
                 EvaluateSunMoonElevation();
 
                 // On minute change event
-                if (m_previousMinute != m_minute)
+                if (m_previousMinute != Minute)
                 {
-                    m_previousMinute = m_minute;
+                    m_previousMinute = Minute;
                     m_onMinuteChange?.Invoke();
                     if (m_customEventScanMode == AzureEventScanMode.ByMinute)
                         ScanCustomEventList();
@@ -337,7 +350,7 @@ namespace UnityEngine.AzureSky
 
             if (m_hour >= m_timelineTransitionTargetHour)
             {
-                if (m_minute >= m_timelineTransitionTargetMinute)
+                if (Minute >= m_timelineTransitionTargetMinute)
                 {
                     if (m_timelineTransitionTargetDay == int.MaxValue && m_timelineTransitionTargetMonth == int.MaxValue && m_timelineTransitionTargetYear == int.MaxValue)
                     {
@@ -378,7 +391,7 @@ namespace UnityEngine.AzureSky
 
             if (m_hour <= m_timelineTransitionTargetHour)
             {
-                if (m_minute <= m_timelineTransitionTargetMinute)
+                if (Minute <= m_timelineTransitionTargetMinute)
                 {
                     if (m_timelineTransitionTargetDay == int.MinValue && m_timelineTransitionTargetMonth == int.MinValue && m_timelineTransitionTargetYear == int.MinValue)
                     {
@@ -420,7 +433,7 @@ namespace UnityEngine.AzureSky
         {
             m_timeOfDay = m_isTimeEvaluatedByCurve ? m_dayLengthCurve.Evaluate(m_timeline) : m_timeline;
             m_hour = (int)Mathf.Floor(m_timeOfDay);
-            m_minute = (int)Mathf.Floor(m_timeOfDay * 60 % 60);
+            Minute = (int)Mathf.Floor(m_timeOfDay * 60 % 60);
         }
 
         /// <summary>
@@ -524,7 +537,7 @@ namespace UnityEngine.AzureSky
                 {
                     if (!m_customEventList[i].isAlreadyExecutedOnThisHour)
                     {
-                        if (m_minute > m_customEventList[i].minute)
+                        if (Minute > m_customEventList[i].minute)
                         {
                             m_customEventList[i].executedHour = m_hour;
                             m_customEventList[i].isAlreadyExecutedOnThisHour = true;
@@ -1039,7 +1052,7 @@ namespace UnityEngine.AzureSky
         /// </summary>
         public Vector2 GetTimeOfDay()
         {
-            return new Vector2(m_hour, m_minute);
+            return new Vector2(m_hour, Minute);
         }
 
         /// <summary>
