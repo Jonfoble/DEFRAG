@@ -1,27 +1,34 @@
 using Fusion;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AzureSky;
 using UnityEngine.Events;
 
-public class FogInstantiator : Singleton<FogInstantiator>
+public class FogInstantiator : Singleton<FogInstantiator> 
 {
+	NetworkRunner runner;
 	[SerializeField] private AzureWeatherProfile fogWeather;
 	[SerializeField] private AzureWeatherProfile defaultWeather;
 	[SerializeField] private Vector2 timeToFog = new Vector2(20f, 0f);
 	[SerializeField] private Vector2 timeToEraseFog = new Vector2(7f, 0f);
 	public UnityAction OnFogWeather;
 	public UnityAction OnDefaultWeather;
-	
+
 	private void OnEnable()
 	{
-		if (Runner.IsServer)
-			AzureTimeController.Instance.OnTimeTick += InvokeFogState;
 	}
 	private void OnDisable()
 	{
-		if (Runner.IsServer)
+		if (runner.IsServer)
 			AzureTimeController.Instance.OnTimeTick -= InvokeFogState;
 		
+	}
+	private IEnumerator Start()
+	{
+		yield return new WaitUntil(() => FindObjectOfType<NetworkRunner>() != null);
+		runner = FindObjectOfType<NetworkRunner>();
+		if (runner.IsServer)
+			AzureTimeController.Instance.OnTimeTick += InvokeFogState;
 	}
 	private void InvokeFogState(Vector2 timeOfDay)
 	{
