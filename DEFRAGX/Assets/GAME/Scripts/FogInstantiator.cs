@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.AzureSky;
 using UnityEngine.Events;
 
-public class FogInstantiator : SimulationSingleton<FogInstantiator>
+public class FogInstantiator : Singleton<FogInstantiator>
 {
 	[SerializeField] private AzureWeatherProfile fogWeather;
 	[SerializeField] private AzureWeatherProfile defaultWeather;
